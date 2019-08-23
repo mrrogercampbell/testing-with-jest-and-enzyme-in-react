@@ -1,13 +1,15 @@
-import React, { Component }from 'react'
+import React, { Component } from 'react';
+import Form from './Form';
 
 class Add extends Component {
-    render() {
-        return (
-            <div className="App">
-                <h1>Add Function</h1>
-            </div>
-        )
-    }
+  render() {
+    return (
+        <div>
+          <h1>Add Function</h1>
+          <Form operator='+'/>
+        </div>
+    );
+  }
 }
 
-export default Add 
+export default Add;
