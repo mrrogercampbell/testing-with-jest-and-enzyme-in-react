@@ -1,4 +1,5 @@
 import Form from '../src/components/Form';
+import { wrap } from 'module';
 
 let wrapper;
 
@@ -35,3 +36,37 @@ describe('<Form /> rendering', () => {
         expect(wrapper.find('#formButtonSubtract')).toHaveLength(1);
     });
 });
+
+describe('<Form /> interactions', () => {
+    it('should change the state firstNumber when onChange function of the #number1 input is invoked', () => {
+        wrapper.find('#number1').simulate('change', 
+            { target: { value: 50 } }
+            )
+            expect(wrapper.state('firstNumber')).toEqual(50)
+            expect(wrapper.state('secondNumber')).toEqual('')
+    })
+
+    it('should change the state secondNumber when onChange function of the #number2 input is invoked', () => {
+        wrapper.find('#number2').simulate('change', 
+            { target: { value: 60 } }
+        )
+        expect(wrapper.state('secondNumber')).toEqual(60)
+        expect(wrapper.state('firstNumber')).toEqual('')
+    })
+})
+
+it('should call the onClick function when \'Add\' button is clicked when the operator is \'+\'', () => {
+    wrapper.setProps({ operator: '+' } )
+    const mockedHandleClickAdd = jest.fn()
+    wrapper.instance().handleAdd = mockedHandleClickAdd
+    wrapper.find('#formButtonAdd').props().onClick()
+    expect(mockedHandleClickAdd).toHaveBeenCalledTimes(1)
+})
+
+it('should call the onClick function when \'Subtract\' button is clicked when the operator is \'-\'', () => {
+    wrapper.setProps({ operator: '-' } )
+    const mockedHandleClickSubtract = jest.fn()
+    wrapper.instance().handleSubtract = mockedHandleClickSubtract
+    wrapper.find('#formButtonSubtract').props().onClick()
+    expect(mockedHandleClickSubtract).toHaveBeenCalledTimes(1)
+})
