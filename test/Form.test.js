@@ -1,41 +1,44 @@
-import Form from '../src/components/Form';
-import { wrap } from 'module';
+import Form from '../src/components/Form'
 
-let wrapper;
+let wrapper
 
 beforeEach(() => {
-    wrapper = shallow(<Form/>);
-});
+    wrapper = shallow(<Form/>)
+})
 
 describe('<Form /> rendering', () => {
+    it('renders correctly', () => {
+        expect(wrapper).toMatchSnapshot()
+    })
+
     it('should render one <form>', () => {
-        expect(wrapper.find('form')).toHaveLength(1);
-    });
+        expect(wrapper.find('form')).toHaveLength(1)
+    })
 
     it('should not render any <button> when operator is not passed in props', () => {
-        expect(wrapper.find('button')).toHaveLength(0);
-    });
+        expect(wrapper.find('button')).toHaveLength(0)
+    })
 
     it('should render 2 <label>s', () => {
-        expect(wrapper.find('label')).toHaveLength(2);
-    });
+        expect(wrapper.find('label')).toHaveLength(2)
+    })
 
     it('should render 2 <input>s', () => {
-        expect(wrapper.find('input')).toHaveLength(2);
-    });
+        expect(wrapper.find('input')).toHaveLength(2)
+    })
 
     it('should render one <button> to Add when operator \'+\' is passed in props', () => {
-        wrapper.setProps({ operator: '+' } );
-        expect(wrapper.find('#formButtonAdd')).toHaveLength(1);
-        expect(wrapper.find('#formButtonSubtract')).toHaveLength(0);
-    });
+        wrapper.setProps({ operator: '+' } )
+        expect(wrapper.find('#formButtonAdd')).toHaveLength(1)
+        expect(wrapper.find('#formButtonSubtract')).toHaveLength(0)
+    })
     
     it('should render one <button> to Subtract when operator \'-\' is passed in props', () => {
-        wrapper.setProps({ operator: '-' } );
-        expect(wrapper.find('#formButtonAdd')).toHaveLength(0);
-        expect(wrapper.find('#formButtonSubtract')).toHaveLength(1);
-    });
-});
+        wrapper.setProps({ operator: '-' } )
+        expect(wrapper.find('#formButtonAdd')).toHaveLength(0)
+        expect(wrapper.find('#formButtonSubtract')).toHaveLength(1)
+    })
+})
 
 describe('<Form /> interactions', () => {
     it('should change the state firstNumber when onChange function of the #number1 input is invoked', () => {
